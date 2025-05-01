@@ -5,7 +5,7 @@ const {
   registerUser,
   loginUser,
   verifyOTP,
-  getUserProfile
+  getUserProfile,
 } = require("../controllers/userController");
 const { protect } = require("../middlewares/authMiddleware.js");
 
@@ -14,7 +14,6 @@ router.post("/register", registerUser);
 router.post("/verify", verifyOTP);
 router.post("/login", loginUser);
 // router.get("/profile", getUserProfile);
-
 
 // Google Auth Routes
 router.get(
@@ -44,7 +43,8 @@ router.get(
     const userToken = require("../utils/generateToken.js")(req.user._id);
     console.log("Generated token :  ", userToken);
     // Option 1: Redirect with token
-    res.redirect(`http://localhost:5173/google/success?token=${userToken}`);
+    const redirectBase = process.env.FRONTEND_URL || "http://localhost:5173";
+    res.redirect(`${redirectBase}/google/success?token=${userToken}`);
     // Option 2 (if using client fetch): res.json({ token });
   }
 );
