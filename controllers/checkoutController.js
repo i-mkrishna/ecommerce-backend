@@ -10,7 +10,7 @@ const Order = require("../models/Order");
 const createCheckout = async (req, res) => {
   const { checkoutItems, shippingAddress, paymentMethod, totalPrice } =
     req.body;
-
+  console.log(checkoutItems, shippingAddress, paymentMethod, totalPrice);
   if (!checkoutItems || checkoutItems.length === 0) {
     return res.status(400).json({ message: "No items in checkout" });
   }

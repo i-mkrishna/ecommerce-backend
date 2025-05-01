@@ -197,12 +197,16 @@ const deleteFromCart = async (req, res) => {
 const getCartData = async (req, res) => {
   const { guestId, userId } = req.query;
 
+  console.log("userId", userId);
+  console.log("getCartData", req.query);
+
   try {
-    const cart = await getCart(userId, guestId);
-    if (!cart) {
+    const cartData = await getCart(userId, guestId);
+    console.log("cartData", cartData);
+    if (!cartData) {
       return res.status(404).json({ message: "Cart not found" });
     }
-    return res.status(200).json(cart);
+    return res.status(200).json(cartData);
   } catch (error) {
     console.error("Get cart error:", error);
     return res.status(500).json({ message: error.message });
