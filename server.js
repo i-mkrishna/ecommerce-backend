@@ -20,9 +20,20 @@ const adminRoutes = require("./routes/adminRoutes");
 const app = express();
 app.use(express.json());
 require("dotenv").config();
+
+const allowedOrigins = [
+  'https://e-commerce-frontend-sdbb.onrender.com',
+  'http://localhost:5173'
+];
+
 app.use(cors({
-  origin: 'https://e-commerce-frontend-sdbb.onrender.com',
-  // credentials: true // if you're sending cookies or auth headers
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 
 
