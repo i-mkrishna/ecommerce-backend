@@ -21,7 +21,7 @@ const app = express();
 app.use(express.json());
 require("dotenv").config();
 app.use(cors({
-  origin: 'https://e-commerce-frontend-sdbb.onrender.com/',
+  origin: 'https://e-commerce-frontend-sdbb.onrender.com',
   // credentials: true // if you're sending cookies or auth headers
 }));
 
