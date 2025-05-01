@@ -44,7 +44,7 @@ router.get(
     const userToken = require("../utils/generateToken.js")(req.user._id);
     console.log("Generated token :  ", userToken);
     // Option 1: Redirect with token
-    res.redirect(`https://e-commerce-frontend-phi-six.vercel.app/google/success?token=${userToken}`);
+    res.redirect(`http://localhost:5173/google/success?token=${userToken}`);
     // Option 2 (if using client fetch): res.json({ token });
   }
 );
