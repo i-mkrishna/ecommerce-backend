@@ -29,7 +29,10 @@ const passportConfig = require("./config/passport");
 // Configure CORS with more permissive settings
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://e-commerce-frontend-sdbb.onrender.com",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: [
       "Content-Type",
@@ -38,10 +41,10 @@ app.use(
       "Accept",
       "Origin",
     ],
-    credentials: true, // Allow cookies
+    credentials: true,
     preflightContinue: false,
     optionsSuccessStatus: 204,
-    maxAge: 86400, // Cache preflight response for 24 hours
+    maxAge: 86400,
   })
 );
 
