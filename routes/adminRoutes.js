@@ -38,7 +38,7 @@ router.post("/", protect, isAdmin, async (req, res) => {
     // Check if the user already exists
     let user = await User.findOne({ email });
     if (user) {
-      console.log(user);
+      // console.log(user);
       return res.status(400).json({ message: "User already exists" });
     }
 
@@ -60,7 +60,7 @@ router.put("/users/:id", protect, isAdmin, async (req, res) => {
   const { name, email, role } = req.body;
   const userId = req.params.id;
 
-  console.log(userId);
+  // console.log(userId);
 
   // Validate input
   if (!role || !userId) {

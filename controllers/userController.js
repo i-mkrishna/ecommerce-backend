@@ -96,11 +96,11 @@ exports.verifyOTP = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
-  console.log("Login attempt:", email, password);
+  // console.log("Login attempt:", email, password);
 
   try {
     const user = await User.findOne({ email });
-    console.log("User found:", user);
+    // console.log("User found:", user);
 
     if (!user || !(await user.matchPassword(password))) {
       return res.status(401).json({ message: "Invalid credentials" });

@@ -197,12 +197,12 @@ const deleteFromCart = async (req, res) => {
 const getCartData = async (req, res) => {
   const { guestId, userId } = req.query;
 
-  console.log("userId", userId);
-  console.log("getCartData", req.query);
+  // console.log("userId", userId);
+  // console.log("getCartData", req.query);
 
   try {
     const cartData = await getCart(userId, guestId);
-    console.log("cartData", cartData);
+    // console.log("cartData", cartData);
     if (!cartData) {
       return res.status(404).json({ message: "Cart not found" });
     }

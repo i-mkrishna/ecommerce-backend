@@ -22,7 +22,7 @@ router.get(
 );
 
 router.get("/profile", protect, async (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
   res.json({
     _id: req.user._id,
     name: req.user.name,
@@ -41,7 +41,7 @@ router.get(
   (req, res) => {
     // Generate a token after successful login
     const userToken = require("../utils/generateToken.js")(req.user._id);
-    console.log("Generated token :  ", userToken);
+    // console.log("Generated token :  ", userToken);
     // Option 1: Redirect with token
     const redirectBase = process.env.FRONTEND_URL || "http://localhost:5173";
     res.redirect(`${redirectBase}/google/success?token=${userToken}`);
