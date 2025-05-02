@@ -17,33 +17,19 @@ const app = express();
 app.use(express.json());
 require("dotenv").config();
 
+const PORT = process.env.PORT || 8000;
+
+connectDB();
+
 const session = require("express-session");
 const passport = require("passport");
 const passportConfig = require("./config/passport");
 
 
-// const allowedOrigins = [
-//   'https://e-commerce-frontend-sdbb.onrender.com',
-//   'http://localhost:5173'
-// ];
-
-// app.use(cors({
-//   origin: function (origin, callback) {
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-//   credentials: true, // if you want to allow cookies
-// }));
-
 // Configure CORS with more permissive settings
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow all origins
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: [
       "Content-Type",
@@ -59,29 +45,6 @@ app.use(
   })
 );
 
-// Add a middleware to set CORS headers directly as a fallback
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-//   );
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Content-Type, Authorization, X-Requested-With, Accept, Origin"
-//   );
-//   res.header("Access-Control-Allow-Credentials", "true");
-
-//   // Handle preflight requests
-//   if (req.method === "OPTIONS") {
-//     return res.status(204).send();
-//   }
-//   next();
-// });
-
-const PORT = process.env.PORT || 8000;
-
-connectDB();
 
 app.use((req, res, next) => {
   console.log(`[${req.method}] ${req.originalUrl}`);
@@ -94,7 +57,7 @@ app.get("/", (req, res) => {
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET, // secure this in production
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   })
@@ -118,10 +81,6 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/admin/products", productAdminRoutes);
 app.use("/api/admin/orders", orderAdminRoutes);
 
-
-
-// Use the admin routes
-app.use("/api/admin", adminRoutes); // checking something
 
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
