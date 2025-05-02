@@ -43,7 +43,7 @@ const passportConfig = require("./config/passport");
 // Configure CORS with more permissive settings
 app.use(
   cors({
-    origin: true, // Allow all origins
+    origin: "http://localhost:5173", // Allow all origins
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: [
       "Content-Type",
@@ -60,24 +60,24 @@ app.use(
 );
 
 // Add a middleware to set CORS headers directly as a fallback
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, X-Requested-With, Accept, Origin"
-  );
-  res.header("Access-Control-Allow-Credentials", "true");
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+//   );
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Content-Type, Authorization, X-Requested-With, Accept, Origin"
+//   );
+//   res.header("Access-Control-Allow-Credentials", "true");
 
-  // Handle preflight requests
-  if (req.method === "OPTIONS") {
-    return res.status(204).send();
-  }
-  next();
-});
+//   // Handle preflight requests
+//   if (req.method === "OPTIONS") {
+//     return res.status(204).send();
+//   }
+//   next();
+// });
 
 const PORT = process.env.PORT || 8000;
 
